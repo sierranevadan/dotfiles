@@ -5,6 +5,7 @@ let mapleader=","
 
 
 " Load plugins from ~/.vim
+" `filetype off` bug may be fixed.
 "filetype off
 execute pathogen#infect()
 filetype plugin indent on
