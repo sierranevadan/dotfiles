@@ -1,5 +1,8 @@
 " This must be first, because it changes other options as side effect
 set nocompatible
+" change the leader to be a comma vs slash
+let mapleader=","
+
 
 " Load plugins from ~/.vim
 "filetype off
