@@ -68,7 +68,7 @@ noremap <C-l> <C-w>l
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
+nmap <silent> <leader>sv :source $MYVIMRC<CR>
 
 augroup vimrcEx
   " Clear all autocmds in the group
@@ -115,6 +115,7 @@ let g:syntastic_python_checkers=['flake8', 'pylint']
 let g:syntastic_python_flake8_args="--max-line-length=99 --max-complexity=8"
 let g:syntastic_python_pylint_args="--max-line-length=99"
 
+" Completion with SuperTab
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
