@@ -67,9 +67,15 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
+" Use jj to exit insert mode
+inoremap jj <ESC>
+
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :source $MYVIMRC<CR>
+nmap <silent> <leader>sv :source $MYVIMRC<CR>:noh<CR>
+
+" Use ,, to unhighlight search
+nmap <silent> <leader>, :noh<CR>
 
 " Jump to last cursor position unless it's invalid or in an event handler
 autocmd BufReadPost *
