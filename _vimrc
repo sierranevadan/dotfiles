@@ -119,6 +119,8 @@ let g:syntastic_python_pylint_args="--max-line-length=99"
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
+" Snippets
+let g:snips_author="Grant Kelly"
 
 " Add the virtualenv's site-packages to vim path
 if has('python')
