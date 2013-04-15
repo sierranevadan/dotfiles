@@ -44,3 +44,6 @@ source $ZSH/oh-my-zsh.sh
 alias git add='nocorrect git add'
 # if there are no matches for globs, leave them alone and execute
 setopt no_nomatch
+
+# Bind ctrl-R for searching, since vi-mode disables this.
+bindkey '' history-incremental-search-backward
