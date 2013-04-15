@@ -114,3 +114,4 @@ endif
 nnoremap <space> za
 vnoremap <space> zf
 set foldmethod=manual
+set foldlevel=99  " disables folding by default
