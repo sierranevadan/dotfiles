@@ -39,6 +39,10 @@ export PATH
 
 source $ZSH/oh-my-zsh.sh
 
+# Override history settings
+HISTSIZE=999999
+SAVEHIST=999999
+
 # Import common aliases
 [ -f ~/.aliases ] && . ~/.aliases
 alias git add='nocorrect git add'
