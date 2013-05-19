@@ -97,6 +97,8 @@ autocmd BufReadPost *
 let g:syntastic_python_checkers=['flake8', 'pylint']
 let g:syntastic_python_flake8_args="--max-line-length=99 --max-complexity=8"
 let g:syntastic_python_pylint_args="--max-line-length=99"
+let g:syntastic_javascript_checkers=['jslint']
+let g:syntastic_auto_loc_list=1
 
 " Completion with SuperTab
 au FileType python set omnifunc=pythoncomplete#Complete
