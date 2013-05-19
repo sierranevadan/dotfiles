@@ -3,6 +3,8 @@ set nocompatible
 " change the leader to be a comma vs slash
 let mapleader=","
 
+" Use an interactive shell
+"set shellcmdflag=-ic
 
 " Load plugins from ~/.vim
 " `filetype off` bug may be fixed.
