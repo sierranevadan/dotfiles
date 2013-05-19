@@ -33,7 +33,7 @@ set ignorecase smartcase
 set wildignore=*.swp,*.bak,*.pyc,*.class
 set switchbuf=useopen
 " allow unsaved background buffers
-set hidden
+"set hidden
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 set showcmd
