@@ -99,14 +99,13 @@ nmap <silent> <leader>sv :source $MYVIMRC<CR>:noh<CR>
 " Use ,, to unhighlight search
 nmap <silent> <leader>, :noh<CR>
 
-" enable auto imports in go
-let g:go_fmt_command = "goimports"
-
 " enable syntax highlighting
 syntax on
 set background=dark
 " use 256 colors
 set t_Co=256 " 256 colors
+let g:solarized_termcolors=256
+colorscheme solarized
 " shorten pause when leaving insert mode
 set ttimeoutlen=50
 
@@ -170,9 +169,9 @@ set backupdir=~/.vim_backups,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=/var/tmp,/tmp
 
 " Folding. Also use `zR` and `zM`
-"nnoremap <space> za
-"vnoremap <space> zf
-"set foldmethod=indent
+nnoremap <space> za
+vnoremap <space> zf
+"set foldmethod=syntax
 set foldlevel=99  " disables folding by default
 
 " Don't separate words by a dash.
@@ -183,7 +182,7 @@ let g:go_fmt_command = "goimports"
 
 "Pymode options
 let g:pymod_run=1
-let g:pymode_folding=0
+let g:pymode_folding=1
 let g:pymode_options=0
 let g:pymode_syntax=1
 let g:pymode_syntax_all=1
@@ -229,14 +228,16 @@ nmap <leader>p "*p
 nmap <silent> <leader>n :NERDTreeToggle<CR>
 
 " syntastic options
-let g:syntastic_python_checkers=[]
+let g:syntastic_python_checkers=['flake8']
 "let g:syntastic_python_flake8_args="--max-line-length=99 --max-complexity=8"
 "let g:syntastic_python_pylint_args="--max-line-length=99"
 let g:syntastic_javascript_checkers=['jshint']
 "let g:syntastic_auto_loc_list=1
-" Better symbols for Syntastic
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '!'
+" symbols for Syntastic. These don't always seem to work...?
+let g:syntastic_error_symbol = 'E▸'
+let g:syntastic_warning_symbol = 'W▸'
+let g:syntastic_style_error_symbol = 'e▸'
+let g:syntastic_style_warning_symbol = 'w▸'
 
 
 " Jump to last cursor position unless it's invalid or in an event handler
@@ -244,6 +245,14 @@ autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
   \   exe "normal g`\"" |
   \ endif
+
+" customize delimitMate
+augroup mydelimitMate
+    au!
+    au FileType markdown let b:delimitMate_nesting_quotes = ["`"]
+    au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
+    au FileType vim let b:delimitMate_quotes = "'"
+augroup END
 
 " Rainbow Parens
 au VimEnter * RainbowParenthesesToggle
