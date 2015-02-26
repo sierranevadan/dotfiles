@@ -10,6 +10,8 @@ endif
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+"
+" Keep Plugin commands between vundle#begin/end.
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -17,36 +19,29 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
 "
 " General vim plugins
 "
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'ervandew/supertab'
-Plugin 'bling/vim-airline'
-Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'tpope/vim-surround'  "surround text with things
+Plugin 'tpope/vim-repeat'  "extends repeat functionality
+Plugin 'ervandew/supertab'  "use tab for completion
+Plugin 'bling/vim-airline'  "trendy status line
+Plugin 'kien/rainbow_parentheses.vim'  "color match parens
+Plugin 'Raimondi/delimitMate'  "auto pair delimiters
+Plugin 'jez/vim-superman'  "man pages in vim
 "
 " File navigation plugins
 "
-Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
-Plugin 'mileszs/ack.vim'
+Plugin 'scrooloose/nerdtree'  "file browser window
+Plugin 'kien/ctrlp.vim'  "fuzzy search filenames
+Plugin 'mileszs/ack.vim'  "search in files (like grep)
 "
 " Git plugins
 "
-Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'  "git commands in vim
+Plugin 'airblade/vim-gitgutter'  "show git status in vim gutter
 "
-" Syntax highlighter
+" Syntax checkers
 Plugin 'scrooloose/syntastic'
 "
 " Go plugins
@@ -69,17 +64,16 @@ Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-classpath'
 Plugin 'guns/vim-clojure-static'
 
-
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
 " Check if vundles need installed
 if vundles_need_installed != 0
     echo "Installing plugins...."
     echo
     :PluginInstall
 endif
-"
 "
 " Brief help
 " :PluginList       - lists configured plugins
@@ -88,9 +82,10 @@ endif
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
 " see :h vundle for more details or wiki for FAQ
+"
 " Put your non-Plugin stuff after this line
 
-" change the leader to be a comma vs slash
+" change the leader to be a comma
 let mapleader=","
 
 " set ctrlp trigger to ",f"
@@ -122,8 +117,9 @@ set ttyfast
 " Show matches to commands in status line
 set wildmenu
 set wildmode=longest:full,full
-" listchars setup, with toggle
+" Dont show listchars (newlines, tabs, etc.)
 set nolist
+" listchars toggle
 nmap <leader>c :set list!<CR>
 set listchars=tab:▸\ ,eol:¬
 highlight NonText guifg=#4a4a59 ctermfg=236 ctermbg=NONE
@@ -153,8 +149,8 @@ set switchbuf=useopen
 set backspace=indent,eol,start
 set showcmd
 set showmode
-set title
-" setup auto-backups
+set title " sends titlestring to terminal
+
 " use ctrl+dir for window navigation
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
@@ -181,6 +177,9 @@ set foldlevel=99  " disables folding by default
 
 " Don't separate words by a dash.
 set iskeyword+=-
+
+" enable auto imports in go
+let g:go_fmt_command = "goimports"
 
 "Pymode options
 let g:pymod_run=1
@@ -223,7 +222,9 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 " Show all open buffers and their status
 nmap <leader>bl :ls<CR>
 
+" paste from clipboard
 nmap <leader>p "*p
+
 " NERD Tree Toggle
 nmap <silent> <leader>n :NERDTreeToggle<CR>
 
@@ -257,7 +258,7 @@ au Syntax * RainbowParenthesesLoadBraces
 " %n <buffer number>
 " fugitive#statusline displays any git info
 " %= <left-right split>
-" %B <hex value under cursor> 
+" %B <hex value under cursor>
 " %l <line number>, %c <column number>, %V <virtual column number>
 " %p <percentage through file (by lines)>
 set statusline=%<%f\ (%{&ft})\ %-3(%m%)\ b#%n\ %{fugitive#statusline()}\ %=\ \ 0x%-8B\ %-10(%3l,%02c%03V%)\ [%p%%]
