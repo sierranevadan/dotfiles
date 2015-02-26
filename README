@@ -8,9 +8,3 @@ To install:
     ln -s ~/.dotfiles/_zshrc ~/.zshrc
     ln -s ~/.dotfiles/_vimrc ~/.vimrc
     ln -s ~/.dotfiles/_vim ~/.vim
-
-Initialize git submodules in ~/.vim:
-
-    cd ~/.dotfiles
-    git submodule update --init --recursive
-    git submodule foreach --recursive git pull origin master
