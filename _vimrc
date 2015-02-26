@@ -1,44 +1,256 @@
-" This must be first, because it changes other options as side effect
-set nocompatible
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+let vundles_need_installed = 0
+if !isdirectory(expand("~/.vim/bundle/Vundle.vim/.git"))
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    let vundles_need_installed = 1
+endif
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Git plugin not hosted on GitHub
+" Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+"
+" General vim plugins
+"
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'ervandew/supertab'
+Plugin 'bling/vim-airline'
+Plugin 'kien/rainbow_parentheses.vim'
+"
+" File navigation plugins
+"
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'mileszs/ack.vim'
+"
+" Git plugins
+"
+Plugin 'tpope/vim-fugitive'
+"
+" Syntax highlighter
+Plugin 'scrooloose/syntastic'
+"
+" Go plugins
+"
+Plugin 'fatih/vim-go'
+"
+" HTML plugins
+"
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+"
+" Python plugins
+"
+Plugin 'klen/python-mode'
+Plugin 'fs111/pydoc.vim'
+"
+" Clojure plugins
+"
+Plugin 'tpope/vim-fireplace'
+Plugin 'tpope/vim-classpath'
+Plugin 'guns/vim-clojure-static'
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" Check if vundles need installed
+if vundles_need_installed != 0
+    echo "Installing plugins...."
+    echo
+    :PluginInstall
+endif
+"
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
 " change the leader to be a comma vs slash
 let mapleader=","
 
-" Use an interactive shell
-"set shellcmdflag=-ic
+" set ctrlp trigger to ",f"
+let g:ctrlp_map = '<leader>f'
+let g:ctrlp_cmd = 'CtrlP'
 
-" Load plugins from ~/.vim
-" `filetype off` bug may be fixed.
-"filetype off
-execute pathogen#infect()
-filetype plugin indent on
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :source $MYVIMRC<CR>:noh<CR>
 
+" Use ,, to unhighlight search
+nmap <silent> <leader>, :noh<CR>
+
+" enable auto imports in go
+let g:go_fmt_command = "goimports"
+
+" enable syntax highlighting
 syntax on
 set background=dark
+" use 256 colors
 set t_Co=256 " 256 colors
+" shorten pause when leaving insert mode
+set ttimeoutlen=50
+
 " remember more commands and search history
 set history=10000
+" assume a fast terminal
+set ttyfast
+" Show matches to commands in status line
+set wildmenu
+set wildmode=longest:full,full
+" listchars setup, with toggle
+set nolist
+nmap <leader>c :set list!<CR>
+set listchars=tab:▸\ ,eol:¬
+highlight NonText guifg=#4a4a59 ctermfg=236 ctermbg=NONE
+highlight SpecialKey guifg=#4a4a59 ctermfg=236 ctermbg=NONE
+
+" configure tabs
 set expandtab
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set autoindent
-set modeline  " Allow vim options embedded in files
+" Allow vim options embedded in files
+set modeline
+
+" Always display a status line
 set laststatus=2
+
+" Set search options
 set showmatch
 set incsearch
 set hlsearch
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
-" highlight current line
 set wildignore=*.swp,*.bak,*.pyc,*.class
 set switchbuf=useopen
-" allow unsaved background buffers
-"set hidden
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 set showcmd
 set showmode
 set title
+" setup auto-backups
+" use ctrl+dir for window navigation
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
+" jk exits insert mode
+inoremap jk <ESC>
+
+" Make cursor stay put after yanking
+ vmap y ygv<Esc>
+
+" Configure backups
+set backup
+set backupdir=~/.vim_backups,~/.tmp,~/tmp,/var/tmp,/tmp
+" Set swap file dir
+set directory=/var/tmp,/tmp
+
+" Folding. Also use `zR` and `zM`
+"nnoremap <space> za
+"vnoremap <space> zf
+"set foldmethod=indent
+set foldlevel=99  " disables folding by default
+
+" Don't separate words by a dash.
+set iskeyword+=-
+
+"Pymode options
+let g:pymod_run=1
+let g:pymode_folding=0
+let g:pymode_options=0
+let g:pymode_syntax=1
+let g:pymode_syntax_all=1
+let g:pymode_syntax_slow_sync=1
+let g:pymode_trim_whitespaces=0
+let g:pymode_lint=1
+let g:pymode_doc=0
+let g:pymode_rope=0
+""If pymode_options is set to 1, pymode will enable the following options for python buffers:
+"setlocal complete+=t
+"setlocal formatoptions-=t
+"setlocal nowrap
+"setlocal textwidth=79
+"setlocal commentstring=#%s
+"setlocal define=^\s*\\(def\\\\|class\\)
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme="gkelly" " requires file airline/themes/gkelly.vim
+let g:airline_powerline_fonts = 1
+
+"
+" Buffer commands
+"
+" This allows buffers to be hidden if you've modified a buffer.
+set hidden
+" To open a new empty buffer
+" This replaces :tabnew which I used to bind to this mapping
+nmap <leader>T :enew<cr>
+" Move to the next buffer
+nmap <leader>l :bnext<CR>
+" Move to the previous buffer
+nmap <leader>h :bprevious<CR>
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <leader>bq :bp <BAR> bd #<CR>
+" Show all open buffers and their status
+nmap <leader>bl :ls<CR>
+
+nmap <leader>p "*p
+" NERD Tree Toggle
+nmap <silent> <leader>n :NERDTreeToggle<CR>
+
+" syntastic options
+let g:syntastic_python_checkers=[]
+"let g:syntastic_python_flake8_args="--max-line-length=99 --max-complexity=8"
+"let g:syntastic_python_pylint_args="--max-line-length=99"
+let g:syntastic_javascript_checkers=['jshint']
+"let g:syntastic_auto_loc_list=1
+" Better symbols for Syntastic
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '!'
+
+
+" Jump to last cursor position unless it's invalid or in an event handler
+autocmd BufReadPost *
+  \ if line("'\"") > 0 && line("'\"") <= line("$") |
+  \   exe "normal g`\"" |
+  \ endif
+
+" Rainbow Parens
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+" Old status line for when airline isn't available
 " status line: %-<number> sets min width
 " %f <filename> (filetype)
 " %m <modified flag>
@@ -50,79 +262,3 @@ set title
 " %p <percentage through file (by lines)>
 set statusline=%<%f\ (%{&ft})\ %-3(%m%)\ b#%n\ %{fugitive#statusline()}\ %=\ \ 0x%-8B\ %-10(%3l,%02c%03V%)\ [%p%%]
 
-" I don't know if I like these
-"set showtabline=2
-"set cursorline
-"set number
-"set numberwidth=5
-"set winwidth=79
-
-" setup auto-backups
-set backup
-set backupdir=~/.vim_backups,~/.tmp,~/tmp,/var/tmp,/tmp
-" Set swap file dir
-set directory=/var/tmp,/tmp
-
-" use ctrl+dir for window navigation
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-
-" Use jj to exit insert mode
-inoremap jj <ESC>
-
-" Quickly edit/reload the vimrc file
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :source $MYVIMRC<CR>:noh<CR>
-
-" Use ,, to unhighlight search
-nmap <silent> <leader>, :noh<CR>
-
-" Jump to last cursor position unless it's invalid or in an event handler
-autocmd BufReadPost *
-  \ if line("'\"") > 0 && line("'\"") <= line("$") |
-  \   exe "normal g`\"" |
-  \ endif
-
-" Python lint and flakes
-"
-" Using just flake8
-"autocmd BufWritePost *.py call Flake8()
-"let g:flake8_max_line_length=99
-" set max complexity: https://en.wikipedia.org/wiki/Cyclomatic_complexity
-"let g:flake8_max_complexity=8
-
-" Using syntastic
-let g:syntastic_python_checkers=['flake8', 'pylint']
-let g:syntastic_python_flake8_args="--max-line-length=99 --max-complexity=8"
-let g:syntastic_python_pylint_args="--max-line-length=99"
-let g:syntastic_javascript_checkers=['jslint']
-let g:syntastic_auto_loc_list=1
-
-" Completion with SuperTab
-au FileType python set omnifunc=pythoncomplete#Complete
-let g:SuperTabDefaultCompletionType = "context"
-set completeopt=menuone,longest,preview
-" Snippets
-let g:snips_author="Grant Kelly"
-
-" Add the virtualenv's site-packages to vim path
-if has('python')
-py << EOF
-import os.path
-import sys
-import vim
-if 'VIRTUAL_ENV' in os.environ:
-    project_base_dir = os.environ['VIRTUAL_ENV']
-    sys.path.insert(0, project_base_dir)
-    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    execfile(activate_this, dict(__file__=activate_this))
-EOF
-endif
-"  
-" Folding. Also use `zR` and `zM`
-nnoremap <space> za
-vnoremap <space> zf
-set foldmethod=manual
-set foldlevel=99  " disables folding by default
