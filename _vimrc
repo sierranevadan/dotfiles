@@ -39,6 +39,7 @@ Plugin 'mileszs/ack.vim'  "search in files (like grep)
 " Git plugins
 "
 Plugin 'tpope/vim-fugitive'  "git commands in vim
+Plugin 'tpope/vim-unimpaired'  "pairs of mappings e.g. in :Glog :cnext is ]q
 Plugin 'airblade/vim-gitgutter'  "show git status in vim gutter
 "
 " Syntax checkers
@@ -259,6 +260,9 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+" Auto open quickfix window after ANY grep command
+autocmd QuickFixCmdPost *grep* cwindow
 
 " Old status line for when airline isn't available
 " status line: %-<number> sets min width
