@@ -105,8 +105,7 @@ syntax on
 set background=dark
 " use 256 colors
 set t_Co=256 " 256 colors
-let g:solarized_termcolors=256
-colorscheme solarized
+colorscheme Tomorrow-Night-Bright
 " shorten pause when leaving insert mode
 set ttimeoutlen=50
 
