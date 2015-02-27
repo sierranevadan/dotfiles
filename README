@@ -1,5 +1,5 @@
 dotfiles:
-files to configure things like vim and zsh to my liking.
+files to configure vim and zsh to my liking.
 .zshrc requires oh-my-zsh.
 
 To install:
@@ -7,4 +7,6 @@ To install:
     git clone https://github.com/sierranevadan/dotfiles.git ~/.dotfiles
     ln -s ~/.dotfiles/_zshrc ~/.zshrc
     ln -s ~/.dotfiles/_vimrc ~/.vimrc
-    ln -s ~/.dotfiles/_vim ~/.vim
+    mkdir -p ~/.vim/bundle
+    # Run vundle:PluginInstall to download plugins
+    vim +PluginInstall
