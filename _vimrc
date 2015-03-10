@@ -231,6 +231,8 @@ nmap <leader>p "*p
 
 " NERD Tree Toggle
 nmap <silent> <leader>n :NERDTreeToggle<CR>
+let NERDTreeIgnore = ['\.pyc$']
+
 
 " syntastic options
 let g:syntastic_python_checkers=['flake8']
