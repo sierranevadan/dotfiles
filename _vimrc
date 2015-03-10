@@ -155,6 +155,12 @@ set showcmd
 set showmode
 set title " sends titlestring to terminal
 
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+
+set diffopt+=vertical
+
 " use ctrl+dir for window navigation
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
@@ -223,6 +229,8 @@ nmap <leader>T :enew<cr>
 nmap <leader>l :bnext<CR>
 " Move to the previous buffer
 nmap <leader>h :bprevious<CR>
+" Close the current buffer
+nmap <leader>d :bd<CR>
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab
 nmap <leader>bq :bp <BAR> bd #<CR>
@@ -241,7 +249,7 @@ let NERDTreeIgnore = ['\.pyc$']
 let g:syntastic_python_checkers=['flake8']
 "let g:syntastic_python_flake8_args="--max-line-length=99 --max-complexity=8"
 "let g:syntastic_python_pylint_args="--max-line-length=99"
-let g:syntastic_javascript_checkers=['jshint']
+" let g:syntastic_javascript_checkers=['jshint']
 "let g:syntastic_auto_loc_list=1
 " symbols for Syntastic. These don't always seem to work...?
 let g:syntastic_error_symbol = 'E▸'
