@@ -26,7 +26,7 @@ Plugin 'tpope/vim-surround'  "surround text with things
 Plugin 'tpope/vim-repeat'  "extends repeat functionality
 Plugin 'ervandew/supertab'  "use tab for completion
 Plugin 'bling/vim-airline'  "trendy status line
-Plugin 'kien/rainbow_parentheses.vim'  "color match parens
+Plugin 'eapache/rainbow_parentheses.vim'  "color match parens
 Plugin 'Raimondi/delimitMate'  "auto pair delimiters
 Plugin 'jez/vim-superman'  "man pages in vim
 "
@@ -106,7 +106,7 @@ syntax on
 set background=dark
 " use 256 colors
 set t_Co=256 " 256 colors
-colorscheme Tomorrow-Night-Bright
+colorscheme gkelly
 " shorten pause when leaving insert mode
 set ttimeoutlen=50
 
