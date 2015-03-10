@@ -302,3 +302,12 @@ autocmd QuickFixCmdPost *grep* cwindow
 " %p <percentage through file (by lines)>
 set statusline=%<%f\ (%{&ft})\ %-3(%m%)\ b#%n\ %{fugitive#statusline()}\ %=\ \ 0x%-8B\ %-10(%3l,%02c%03V%)\ [%p%%]
 
+" Edit an existing macro
+" From: http://www.jarrodctaylor.com/posts/Vim-Easily-Edit-Macros/
+function! EditMacro()
+  call inputsave()
+  let g:regToEdit = input('Register to edit: ')
+  call inputrestore()
+  execute "nnoremap <Plug>em :let @" . eval("g:regToEdit") . "='<C-R><C-R>" . eval("g:regToEdit")
+endfunction
+nmap <Leader>em :call EditMacro()<CR> <Plug>em
