@@ -274,6 +274,13 @@ augroup mydelimitMate
     au FileType eruby let b:delimitMate_expand_space = 1
 augroup END
 
+" treat json like javascript
+au BufNewFile,BufRead *.json set ft=javascript
+
+" treat templates like html
+" au BufNewFile,BufRead *.hbs set filetype=html syntax=handlebars
+" au BufNewFile,BufRead *.{mustache,handlebars,hbs}{,.erb} set filetype=html syntax=mustache | runtime! ftplugin/mustache.vim ftplugin/mustache*.vim ftplugin/mustache/*.vim
+
 " Rainbow Parens
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
