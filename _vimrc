@@ -53,6 +53,7 @@ Plugin 'fatih/vim-go'
 "
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'mustache/vim-mustache-handlebars' " support for .hbs templates
 "
 " Python plugins
 "
