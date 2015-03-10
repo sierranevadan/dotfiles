@@ -208,6 +208,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme="gkelly" " requires file airline/themes/gkelly.vim
 let g:airline_powerline_fonts = 1
 
+" Disable git gutter mappings
+let g:gitgutter_map_keys = 0
+
 "
 " Buffer commands
 "
