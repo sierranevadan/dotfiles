@@ -247,11 +247,19 @@ let g:syntastic_style_error_symbol = 'e▸'
 let g:syntastic_style_warning_symbol = 'w▸'
 
 
-" Jump to last cursor position unless it's invalid or in an event handler
-autocmd BufReadPost *
-  \ if line("'\"") > 0 && line("'\"") <= line("$") |
-  \   exe "normal g`\"" |
-  \ endif
+augroup vimrcEx
+    au!
+    " au BufWinLeave ?* mkview
+    " au BufWinEnter ?* silent loadview
+    " Jump to last cursor position unless it's invalid or in an event handler
+    autocmd BufReadPost *
+      \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal g`\"" |
+      \ endif
+
+    autocmd FileType gitcommit setlocal textwidth=72
+    autocmd FileType gitcommit setlocal spell
+augroup END
 
 " customize delimitMate
 augroup mydelimitMate
