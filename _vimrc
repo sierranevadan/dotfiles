@@ -60,6 +60,10 @@ Plugin 'mustache/vim-mustache-handlebars' " support for .hbs templates
 Plugin 'klen/python-mode'
 Plugin 'fs111/pydoc.vim'
 "
+" Ruby on rails plugin
+"
+Plugin 'tpope/vim-rails'  "rails shortcuts
+"
 " Clojure plugins
 "
 Plugin 'tpope/vim-fireplace'
@@ -250,9 +254,14 @@ autocmd BufReadPost *
 " customize delimitMate
 augroup mydelimitMate
     au!
+    let g:delimitMate_jump_expansion = 1
+    au FileType * let b:delimitMate_expand_cr = 2
     au FileType markdown let b:delimitMate_nesting_quotes = ["`"]
     au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
     au FileType vim let b:delimitMate_quotes = "'"
+    au FileType eruby let b:delimitMate_matchpairs = '(:),[:],{:},<:>'
+    au FileType eruby let b:delimitMate_quotes = "\" ' ` | %"
+    au FileType eruby let b:delimitMate_expand_space = 1
 augroup END
 
 " Rainbow Parens
