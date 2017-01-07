@@ -26,6 +26,7 @@ Plugin 'tpope/vim-surround'  "surround text with things
 Plugin 'tpope/vim-repeat'  "extends repeat functionality
 Plugin 'ervandew/supertab'  "use tab for completion
 Plugin 'bling/vim-airline'  "trendy status line
+Plugin 'vim-airline/vim-airline-themes'  "trendy status line
 Plugin 'eapache/rainbow_parentheses.vim'  "color match parens
 Plugin 'Raimondi/delimitMate'  "auto pair delimiters
 Plugin 'jez/vim-superman'  "man pages in vim
@@ -130,10 +131,10 @@ highlight NonText guifg=#4a4a59 ctermfg=236 ctermbg=NONE
 highlight SpecialKey guifg=#4a4a59 ctermfg=236 ctermbg=NONE
 
 " configure tabs
-set expandtab
-set tabstop=4
+set tabstop=4  " number of visual spaces per TAB
+set softtabstop=4 " number of spaces in TAB when editing
+set expandtab " turn TAB into spaces
 set shiftwidth=4
-set softtabstop=4
 set autoindent
 " Allow vim options embedded in files
 set modeline
@@ -169,9 +170,15 @@ noremap <C-l> <C-w>l
 
 " jk exits insert mode
 inoremap jk <ESC>
+" Map ctrl-e to jump to end of line in insert mode
+inoremap <C-e> <C-o>$
 
 " Make cursor stay put after yanking
  vmap y ygv<Esc>
+ "
+" press 8 to comment a visual block
+vmap 8 dO/**/kp
+
 
 " Configure backups
 set backup
@@ -211,7 +218,7 @@ let g:pymode_rope=0
 "setlocal define=^\s*\\(def\\\\|class\\)
 
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme="gkelly" " requires file airline/themes/gkelly.vim
+let g:airline_theme="tomorrow" " requires file airline/themes/gkelly.vim
 let g:airline_powerline_fonts = 1
 
 " Disable git gutter mappings
@@ -230,10 +237,10 @@ nmap <leader>l :bnext<CR>
 " Move to the previous buffer
 nmap <leader>h :bprevious<CR>
 " Close the current buffer
-nmap <leader>d :bd<CR>
+nmap <leader>bd :bd<CR>
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab
-nmap <leader>bq :bp <BAR> bd #<CR>
+nmap <leader>d :bp <BAR> bd #<CR>
 " Show all open buffers and their status
 nmap <leader>bl :ls<CR>
 
@@ -270,6 +277,8 @@ augroup vimrcEx
 
     autocmd FileType gitcommit setlocal textwidth=72
     autocmd FileType gitcommit setlocal spell
+    " Edit in place for crontab and gitcommit filetypes
+    autocmd filetype crontab,gitcommit setlocal nobackup nowritebackup
 augroup END
 
 " customize delimitMate
